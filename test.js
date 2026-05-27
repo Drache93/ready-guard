@@ -18,3 +18,29 @@ test('basic', async function (t) {
     b.exit()
   }
 })
+
+test('readme - example', async (t) => {
+  class CountOnce {
+    constructor () {
+      this.value = 0
+      this.counting = new ReadyGuard()
+      this.count()
+    }
+
+    async count () {
+      if (!this.counting.enter()) return this.counting.ready()
+
+      // Simulate doing something asynchronous
+      setTimeout(() => {
+        this.value++
+        this.counting.exit()
+      }, 100)
+      return this.counting.ready()
+    }
+  }
+
+  const counter = new CountOnce()
+  await Promise.all([counter.count(), counter.count()])
+
+  t.is(counter.value, 1, 'ran once')
+})
