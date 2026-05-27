@@ -16,4 +16,4 @@ const ReadyGuard = require('ready-guard')
 
 ## License
 
-MIT
+Apache-2.0
