@@ -27,7 +27,7 @@ test('readme - example', async (t) => {
       this.count()
     }
 
-    async count() {
+    count() {
       if (!this.counting.enter()) return this.counting.ready()
 
       // Simulate doing something asynchronous
@@ -45,7 +45,7 @@ test('readme - example', async (t) => {
   t.is(counter.value, 1, 'ran once')
 })
 
-test('destroy', async (t) => {
+test('destroy', (t) => {
   const b = new ReadyGuard()
 
   t.absent(b.destroyed, 'destroyed flag initially not set')

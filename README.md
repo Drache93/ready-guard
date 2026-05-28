@@ -20,7 +20,7 @@ class CountOnce {
     this.count()
   }
 
-  async count() {
+  count() {
     if (!this.counting.enter()) return this.counting.ready()
 
     // Simulate doing something asynchronous
