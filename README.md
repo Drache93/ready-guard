@@ -14,13 +14,13 @@ npm install ready-guard
 const ReadyGuard = require('ready-guard')
 
 class CountOnce {
-  constructor () {
+  constructor() {
     this.value = 0
     this.counting = new ReadyGuard()
     this.count()
   }
 
-  async count () {
+  async count() {
     if (!this.counting.enter()) return this.counting.ready()
 
     // Simulate doing something asynchronous
@@ -51,7 +51,7 @@ A promise representing the scope for the guard has been exited at least once.
 Called to note that the guarded process was entered or initiated. Useful for debouncing calls for readying something once:
 
 ```js
-async function scope () {
+async function scope() {
   if (!this.guard.enter()) return this.guard.ready()
   // Do stuff...
   this.guard.exit()
