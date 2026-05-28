@@ -21,13 +21,13 @@ test('basic', async function (t) {
 
 test('readme - example', async (t) => {
   class CountOnce {
-    constructor () {
+    constructor() {
       this.value = 0
       this.counting = new ReadyGuard()
       this.count()
     }
 
-    async count () {
+    async count() {
       if (!this.counting.enter()) return this.counting.ready()
 
       // Simulate doing something asynchronous
