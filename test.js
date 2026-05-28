@@ -44,3 +44,19 @@ test('readme - example', async (t) => {
 
   t.is(counter.value, 1, 'ran once')
 })
+
+test('destroy', async (t) => {
+  const b = new ReadyGuard()
+
+  t.absent(b.destroyed, 'destroyed flag initially not set')
+  t.ok(b.enter(), 'first enter & before destroy returns true')
+  t.execution(b.destroy(), 'destroy() doesnt throw itself')
+  t.exception(() => b.ready(), 'Ready guard destroyed', 'throws after destroying')
+  t.ok(b.destroyed, 'sets flag as destroyed')
+
+  const b2 = new ReadyGuard()
+
+  b2.destroy()
+  t.exception(() => b2.ready(), 'Ready guard destroyed', 'throws after destroying again')
+  t.absent(b2.enter(), 'enter() after destroy() returns false')
+})
